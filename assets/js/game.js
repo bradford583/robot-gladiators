@@ -5,11 +5,14 @@ var randomNumber = function(min, max) {
   return value;
 }
 
-var fight = function(enemy) {
-    while (playerInfo.health > 0 && enemy.health > 0) {
-      // ask player if they'd like to fight or run
-      var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
-  
+var fightOrSkip = function() {
+  //ask player if they'd like to fight or skip using fightOr Skip function
+  var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
+        //Enter the conditional recursive function call here
+        if (promptFight=== "" || promptFight=== null) {
+          return fightOrSkip();
+        }
+        
       // if player picks "skip" confirm and then stop the loop
       if (promptFight === "skip" || promptFight === "SKIP") {
         // confirm player wants to skip
@@ -21,7 +24,11 @@ var fight = function(enemy) {
           // subtract money from playerMoney for skipping
           playerInfo.money = Math.max(0, playerInfo.money - 10);
           console.log("playerMoney", playerInfo.money)
-          break;
+}
+var fight = function(enemy) {
+    while (playerInfo.health > 0 && enemy.health > 0) {
+      // ask player if they'd like to fight or run
+        fightOrSkip();
         }
       }
   
@@ -116,21 +123,20 @@ var fight = function(enemy) {
       
       var shop = function() {
         var shopOptionPrompt = window.prompt(
-          "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE' or 'LEAVE' to make a choice."
+          "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter 1 for REFILL, 2 for UPGRADE, or 3 for LEAVE."
         );
+        shopOptionPrompt = parseInt(shopOptionPrompt);
         switch (shopOptionPrompt) {
-          case "REFILL":
-          case "refill":
+          
+          case 1:
             playerInfo.refillHealth();
             break;
             
-            case "UPGRADE":
-          case "upgrade":
+            case 2:
             playerInfo.upgradeAttack();
             break;
           
-          case "LEAVE":
-          case "leave":
+          case 3:
             window.alert("Leaving the store.");
             break;
           default:
