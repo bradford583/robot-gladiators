@@ -141,8 +141,19 @@ var fight = function(enemy) {
         }
       };
 
+      var getPlayerName = function() {
+        var name = "";
+
+        while (name=== "" || name === null) {
+          name = prompt("What is you robot's name?");
+        }
+          
+          console.log("Your robot's name is " + name)
+        }
+      
 
       var playerInfo = {
+        name: getPlayerName(),
         name: window.prompt("What is you robot's name?"),
         health: 100,
         attack: 10,
